@@ -1,0 +1,1039 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Product Details | Amptronix</title>
+
+    <style>
+        /* =========================
+           GENERAL STYLING
+        ========================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #087cf2;
+            --primary-dark: #0565c7;
+            --dark: #10233d;
+            --text: #334155;
+            --muted: #718096;
+            --light-blue: #eef6ff;
+            --border: #dce7f1;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f8fbff;
+            color: var(--dark);
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .product-header {
+            width: 100%;
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
+
+            padding: 18px 7%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--dark);
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .back-link {
+            color: var(--primary);
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .back-link:hover {
+            color: var(--primary-dark);
+        }
+
+
+        /* =========================
+           MAIN PRODUCT DETAILS
+        ========================= */
+
+        .product-container {
+            max-width: 1250px;
+            margin: auto;
+            padding: 55px 7%;
+        }
+
+        .product-top {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 55px;
+            align-items: start;
+        }
+
+
+        /* PRODUCT IMAGE */
+
+        .product-gallery {
+            width: 100%;
+        }
+
+        .main-image {
+            width: 100%;
+            height: 380px;
+
+            background: linear-gradient(
+                145deg,
+                #f0f7ff,
+                #e1efff
+            );
+
+            border: 1px solid var(--border);
+            border-radius: 16px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            overflow: hidden;
+        }
+
+        .main-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: none;
+        }
+
+        .image-placeholder {
+            text-align: center;
+            color: #8aa5c2;
+        }
+
+        .image-placeholder span {
+            font-size: 55px;
+            display: block;
+            margin-bottom: 12px;
+        }
+
+        .image-placeholder p {
+            font-size: 14px;
+        }
+
+
+        /* IMAGE DOTS */
+
+        .image-dots {
+            display: flex;
+            justify-content: center;
+            gap: 9px;
+            margin-top: 18px;
+        }
+
+        .image-dot {
+            width: 10px;
+            height: 10px;
+
+            border: none;
+            border-radius: 50%;
+
+            background: #cbd8e5;
+            cursor: pointer;
+        }
+
+        .image-dot.active {
+            background: var(--primary);
+            transform: scale(1.2);
+        }
+
+
+        /* PRODUCT INFORMATION */
+
+        .product-information {
+            padding-top: 5px;
+        }
+
+        .product-label {
+            display: inline-block;
+
+            background: var(--light-blue);
+            color: var(--primary);
+
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+
+            padding: 7px 12px;
+            border-radius: 20px;
+
+            margin-bottom: 18px;
+        }
+
+        .product-information h1 {
+            font-size: clamp(28px, 4vw, 38px);
+            line-height: 1.3;
+            margin-bottom: 12px;
+        }
+
+        .model-number {
+            color: var(--muted);
+            font-size: 15px;
+            margin-bottom: 20px;
+        }
+
+        .product-description {
+            color: var(--text);
+            font-size: 15px;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+
+        .quote-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            background: var(--primary);
+            color: var(--white);
+
+            padding: 13px 22px;
+            border-radius: 8px;
+
+            font-size: 14px;
+            font-weight: 700;
+
+            border: 1px solid var(--primary);
+            cursor: pointer;
+
+            transition: 0.3s ease;
+        }
+
+        .quote-button:hover {
+            background: var(--primary-dark);
+            border-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+
+        /* =========================
+           PRODUCT INFORMATION TABS
+        ========================= */
+
+        .product-details-section {
+            margin-top: 65px;
+        }
+
+        .details-layout {
+            display: grid;
+            grid-template-columns: 270px 1fr;
+            gap: 35px;
+            align-items: start;
+        }
+
+        .details-menu {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 10px;
+        }
+
+        .details-menu button {
+            width: 100%;
+
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            padding: 16px 15px;
+
+            border: none;
+            border-radius: 8px;
+
+            background: transparent;
+            color: var(--text);
+
+            font-size: 15px;
+            font-weight: 600;
+            text-align: left;
+
+            cursor: pointer;
+            transition: 0.25s ease;
+        }
+
+        .details-menu button:hover {
+            background: var(--light-blue);
+            color: var(--primary);
+        }
+
+        .details-menu button.active {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .menu-icon {
+            width: 25px;
+            font-size: 19px;
+            text-align: center;
+        }
+
+
+        /* CONTENT PANEL */
+
+        .details-content {
+            min-height: 280px;
+
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+
+            padding: 30px;
+        }
+
+        .content-panel {
+            display: none;
+        }
+
+        .content-panel.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .content-panel h2 {
+            font-size: 23px;
+            margin-bottom: 15px;
+        }
+
+        .content-panel p {
+            color: var(--text);
+            font-size: 14px;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+
+        /* DOCUMENT PLACEHOLDER */
+
+        .document-placeholder {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+
+            background: var(--light-blue);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+
+            padding: 18px;
+            margin-top: 20px;
+        }
+
+        .document-icon {
+            width: 45px;
+            height: 45px;
+
+            display: grid;
+            place-items: center;
+
+            background: var(--white);
+            border-radius: 9px;
+
+            font-size: 22px;
+        }
+
+        .document-placeholder h3 {
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .document-placeholder span {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+
+        /* QUOTE FORM */
+
+        .quote-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+
+            padding: 12px;
+
+            border: 1px solid var(--border);
+            border-radius: 7px;
+
+            font-family: inherit;
+            font-size: 14px;
+
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(8, 124, 242, 0.08);
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+
+        /* FOOTER */
+
+        .product-footer {
+            text-align: center;
+            padding: 25px 15px;
+
+            color: var(--muted);
+            font-size: 13px;
+
+            border-top: 1px solid var(--border);
+            background: var(--white);
+        }
+
+
+        /* =========================
+           RESPONSIVE DESIGN
+        ========================= */
+
+        @media (max-width: 850px) {
+
+            .product-container {
+                padding: 40px 5%;
+            }
+
+            .product-top {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .main-image {
+                height: 320px;
+            }
+
+            .details-layout {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .details-menu {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .details-menu button {
+                font-size: 13px;
+                padding: 13px 10px;
+            }
+
+        }
+
+
+        @media (max-width: 500px) {
+
+            .product-header {
+                padding: 15px 5%;
+            }
+
+            .logo {
+                font-size: 20px;
+            }
+
+            .main-image {
+                height: 260px;
+            }
+
+            .details-content {
+                padding: 20px;
+            }
+
+            .quote-form {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full-width {
+                grid-column: auto;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<?php require_once __DIR__ . '/header.php'; ?>
+
+
+<!-- =========================
+     PRODUCT DETAILS
+========================= -->
+
+<main class="product-container">
+
+
+    <!-- PRODUCT TOP SECTION -->
+
+    <section class="product-top">
+
+
+        <!-- PRODUCT IMAGE GALLERY -->
+
+        <div class="product-gallery">
+
+            <div class="main-image">
+
+                <div class="image-placeholder">
+
+                    <span>▧</span>
+
+                    <p>Product Image</p>
+
+                </div>
+
+                <img id="productImage" src="" alt="Product image">
+
+            </div>
+
+
+            <div class="image-dots">
+
+                <button class="image-dot active"
+                        aria-label="Product image 1"></button>
+
+                <button class="image-dot"
+                        aria-label="Product image 2"></button>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- PRODUCT INFORMATION -->
+
+        <div class="product-information">
+
+            <span class="product-label">
+                AMPTRONIX PRODUCT
+            </span>
+
+            <h1 id="productName">
+                Product Name
+            </h1>
+
+            <p class="model-number">
+                Model No: <strong id="productModel">1224</strong>
+            </p>
+
+            <p class="product-description">
+                Designed for reliable performance, efficient operation,
+                and dependable connectivity. Explore the product details,
+                applications, technical documentation, and accessories.
+            </p>
+
+            <button class="quote-button"
+                    onclick="openTab('quote')">
+
+                Request a Quote →
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         PRODUCT DETAILS MENU
+    ========================= -->
+
+    <section class="product-details-section">
+
+        <div class="details-layout">
+
+
+            <!-- LEFT MENU -->
+
+            <div class="details-menu">
+
+                <button class="active"
+                        onclick="openTab('dataset', this)">
+
+                    <span class="menu-icon">▤</span>
+                    Dataset
+
+                </button>
+
+
+                <button onclick="openTab('application', this)">
+
+                    <span class="menu-icon">⌘</span>
+                    Application
+
+                </button>
+
+
+                <button onclick="openTab('quote', this)">
+
+                    <span class="menu-icon">✉</span>
+                    Request a Quote
+
+                </button>
+
+
+                <button onclick="openTab('box', this)">
+
+                    <span class="menu-icon">▣</span>
+                    What's in the box
+
+                </button>
+
+            </div>
+
+
+
+            <!-- RIGHT CONTENT -->
+
+            <div class="details-content">
+
+
+                <!-- DATASET -->
+
+                <div class="content-panel active"
+                     id="dataset">
+
+                    <h2>Product Dataset</h2>
+
+                    <p>
+                        Find technical specifications, product
+                        documentation, and downloadable resources here.
+                    </p>
+
+                    <div class="document-placeholder">
+
+                        <div class="document-icon">
+                            📄
+                        </div>
+
+                        <div>
+
+                            <h3>Technical Datasheet</h3>
+
+                            <span>
+                                PDF document will be added here
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- APPLICATION -->
+
+                <div class="content-panel"
+                     id="application">
+
+                    <h2>Product Applications</h2>
+
+                    <p>
+                        Learn how this product can be used in different
+                        network environments and technical applications.
+                    </p>
+
+                    <div class="document-placeholder">
+
+                        <div class="document-icon">
+                            🌐
+                        </div>
+
+                        <div>
+
+                            <h3>Application Guide</h3>
+
+                            <span>
+                                Application documentation will be added here
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- REQUEST A QUOTE -->
+
+                <div class="content-panel"
+                     id="quote">
+
+                    <h2>Request a Quote</h2>
+
+                    <p>
+                        Interested in this product? Share your details
+                        and requirements with our team.
+                    </p>
+
+                    <form class="quote-form"
+                          onsubmit="submitQuote(event)">
+
+
+                        <div class="form-group">
+
+                            <label for="customerName">
+                                Your Name
+                            </label>
+
+                            <input type="text"
+                                   id="customerName"
+                                   placeholder="Enter your name"
+                                   required>
+
+                        </div>
+
+
+
+                        <div class="form-group">
+
+                            <label for="customerEmail">
+                                Email Address
+                            </label>
+
+                            <input type="email"
+                                   id="customerEmail"
+                                   placeholder="Enter your email"
+                                   required>
+
+                        </div>
+
+
+
+                        <div class="form-group">
+
+                            <label for="customerPhone">
+                                Phone Number
+                            </label>
+
+                            <input type="tel"
+                                   id="customerPhone"
+                                   placeholder="Enter phone number">
+
+                        </div>
+
+
+
+                        <div class="form-group">
+
+                            <label for="customerCompany">
+                                Company Name
+                            </label>
+
+                            <input type="text"
+                                   id="customerCompany"
+                                   placeholder="Enter company name">
+
+                        </div>
+
+
+
+                        <div class="form-group full-width">
+
+                            <label for="customerMessage">
+                                Your Requirements
+                            </label>
+
+                            <textarea id="customerMessage"
+                                      placeholder="Tell us about your requirements"></textarea>
+
+                        </div>
+
+
+
+                        <div class="form-group full-width">
+
+                            <button type="submit"
+                                    class="quote-button">
+
+                                Submit Request →
+
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+
+
+                <!-- WHAT'S IN THE BOX -->
+
+                <div class="content-panel"
+                     id="box">
+
+                    <h2>What's in the Box?</h2>
+
+                    <p>
+                        Check the standard items supplied with this product.
+                        The exact package contents can be updated for each
+                        product.
+                    </p>
+
+                    <div class="document-placeholder">
+
+                        <div class="document-icon">
+                            📦
+                        </div>
+
+                        <div>
+
+                            <h3>Package Contents</h3>
+
+                            <span>
+                                Product accessories and package details
+                                will be added here
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer class="product-footer">
+
+    © 2026 Amptronix. All Rights Reserved.
+
+</footer>
+
+
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
+<script>
+
+    /* =========================
+       PRODUCT DATA
+    ========================= */
+
+    const productDetails = {
+
+        name: "Product Name",
+
+        model: "1224",
+
+        image: ""
+
+    };
+
+
+    /*
+       Later, you can pass product details
+       from the product card or admin panel.
+    */
+
+
+    document.getElementById("productName").textContent =
+        productDetails.name;
+
+    document.getElementById("productModel").textContent =
+        productDetails.model;
+
+
+
+    /* =========================
+       TAB NAVIGATION
+    ========================= */
+
+    function openTab(tabId, clickedButton = null) {
+
+        // Hide all content panels
+
+        document.querySelectorAll(".content-panel").forEach(panel => {
+
+            panel.classList.remove("active");
+
+        });
+
+
+        // Show selected content
+
+        const selectedPanel = document.getElementById(tabId);
+
+        if (selectedPanel) {
+
+            selectedPanel.classList.add("active");
+
+        }
+
+
+        // Update selected menu button
+
+        document.querySelectorAll(".details-menu button").forEach(button => {
+
+            button.classList.remove("active");
+
+        });
+
+
+        // If the menu button was clicked, highlight it
+
+        if (clickedButton) {
+
+            clickedButton.classList.add("active");
+
+        } else {
+
+            document.querySelectorAll(".details-menu button").forEach(button => {
+
+                if (button.getAttribute("onclick")?.includes(tabId)) {
+
+                    button.classList.add("active");
+
+                }
+
+            });
+
+        }
+
+    }
+
+
+
+    /* =========================
+       QUOTE FORM DEMO
+    ========================= */
+
+    function submitQuote(event) {
+
+        event.preventDefault();
+
+        alert(
+            "Thank you! Your quote request form is ready. " +
+            "Connect it to your backend to receive enquiries."
+        );
+
+    }
+
+
+
+    /* =========================
+       IMAGE DOTS DEMO
+    ========================= */
+
+    const imageDots = document.querySelectorAll(".image-dot");
+
+    imageDots.forEach((dot, index) => {
+
+        dot.addEventListener("click", () => {
+
+            imageDots.forEach(item => {
+
+                item.classList.remove("active");
+
+            });
+
+            dot.classList.add("active");
+
+        });
+
+    });
+
+</script>
+
+</body>
+
+</html>
